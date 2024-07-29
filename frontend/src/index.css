@@ -162,4 +162,42 @@
   filter: blur(750px);
 }
 
-
+@keyframes slideInFromLeft {
+    0% {
+      opacity: 0;
+      transform: translateX(-100%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes slideInFromRight {
+    0% {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  .animate-slideInFromLeft {
+    animation: slideInFromLeft 1s ease-out;
+  }
+  
+  .animate-slideInFromRight {
+    animation: slideInFromRight 0.8s ease-out;
+  }
+  
+  .glassmorphism {
+    background: rgba(255, 255, 255, 0.1); /* White with 10% opacity */
+    backdrop-filter: blur(10px); /* Apply a blur effect */
+    -webkit-backdrop-filter: blur(10px); /* For Safari support */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* White border with 20% opacity */
+    border-radius: 0.5rem; /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  }
+  

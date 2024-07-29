@@ -1,16 +1,18 @@
 import { useState } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
 
 import { close, logo, menu } from "../assets";
 import { navLinks } from "../constants";
 import LoginPopup from "./LoginPopUP/LoginPopup";
+
 const Navbar = () => {
   const [active, setActive] = useState("Home");
-  const [toggle,setToggle]=useState(false)
+  const [toggle, setToggle] = useState(false);
   const [loginPopup, setLoginPopup] = useState(false);
   const handleLoginPopup = () => {
     setLoginPopup(!loginPopup);
   };
-
+  const { loginWithRedirect,isAuthenticated ,logout} = useAuth0();
 
   return (
     <nav className="w-full flex py-6 justify-between items-center navbar">
@@ -28,13 +30,28 @@ const Navbar = () => {
             <a href={`#${nav.id}`}>{nav.title}</a>
           </li>
         ))}
-       <li  
+        {isAuthenticated?
+              <li
+              className={`font-poppins font-normal cursor-pointer text-[16px] ${
+                active === "logout" ? "text-white" : "text-dimWhite"
+              } ml-6`}
+              onClick={() => {logout(); setActive("logout")}}
+            >
+              Logout
+            </li>
+          :
+            <li
             className={`font-poppins font-normal cursor-pointer text-[16px] ${
               active === "login" ? "text-white" : "text-dimWhite"
             } ml-6`}
-            onClick={() => {setActive("login");handleLoginPopup()}}>
-              Login
-       </li>
+            onClick={() =>{ loginWithRedirect(); setActive("login")}}
+          >
+            Login
+          </li>
+        }
+        
+
+       
       </ul>
 
       <div className="sm:hidden flex flex-1 justify-end items-center">
